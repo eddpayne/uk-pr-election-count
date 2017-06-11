@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import requests
 import json
@@ -27,7 +27,7 @@ def dHondt(results, seats):
   # Find the highest vote for each round and assign a seat to that party
   # This is assuming pure PR, there is no hurdle (usually 3 or 5%)
   for round in range(seats):
-    thisSeat = results.keys()[0]
+    thisSeat = list(results.keys())[0]
     for party in results.keys():
       if results[party] > results[thisSeat]:
         thisSeat = party
@@ -35,7 +35,7 @@ def dHondt(results, seats):
     results[thisSeat] = origvote[thisSeat] / elected[thisSeat] + 1
 
   # Clean up the results dict by removing parties with no seats
-  for party in elected.keys():
+  for party in list(elected.keys()):
     if elected[party] == 0:
       del elected[party]
 
@@ -87,10 +87,10 @@ for region in sorted(parties.keys()):
     else:
       nationalresult[party] = regionresult[party]
 
-  print region, regionresult
+  print(region, regionresult)
 
 # Print out the final result
-print
-print "National Results"
-print "================"
-print json.dumps(nationalresult, indent=2, sort_keys=True)
+print()
+print("National Results")
+print("================")
+print(json.dumps(nationalresult, indent=2, sort_keys=True))
