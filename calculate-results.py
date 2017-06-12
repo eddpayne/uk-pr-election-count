@@ -6,14 +6,10 @@ from electioncount import dHondt
 
 # Using the JSON feed from the Guardian for the results
 resultsJSONurl = "https://interactive.guim.co.uk/2017/06/ukelection2017-data/snap/full.json"
-resultsJSON = "../../election/election2017.json"
 regionsJSON = "constituencies-regions.json"
 
-#r = requests.get(resultsJSONurl)
-#results = r.json()
-
-resultsFH = open(resultsJSON)
-results = json.load(resultsFH)
+r = requests.get(resultsJSONurl)
+results = r.json()
 
 regionsFH = open(regionsJSON)
 regions = json.load(regionsFH)
@@ -43,8 +39,6 @@ for constituency in results:
     if not result['party'] in parties[thisRegion]:
       parties[thisRegion][result['party']] = 0
     parties[thisRegion][result['party']] += result['votes']
-
-print(parties['East Midlands'])
 
 # Do the calculation per region and print out the result
 for region in sorted(parties.keys()):
