@@ -2,7 +2,12 @@
 
 import requests
 import json
-from electioncount import dHondt
+from electioncount import dHondt, SainteLague
+
+def prettyPrint(dictionary):
+  longest = max([len(x) for x in list(dictionary.keys())])
+  for line in sorted(dictionary,key=dictionary.get,reverse=True):
+    print(line + " " * (longest - len(line)) + ": " + str(dictionary[line]))
 
 # Using the JSON feed from the Guardian for the results
 resultsJSONurl = "https://interactive.guim.co.uk/2017/06/ukelection2017-data/snap/full.json"
@@ -49,10 +54,11 @@ for region in sorted(parties.keys()):
     else:
       nationalresult[party] = regionresult[party]
 
-  print(region, regionresult)
+  #print(region, regionresult)
 
 # Print out the final result
-print()
 print("National Results")
 print("================")
-print(json.dumps(nationalresult, indent=2, sort_keys=True))
+prettyPrint(nationalresult)
+print()
+print("Total Seats: " + str((sum(nationalresult.values()))))
