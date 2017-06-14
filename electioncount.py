@@ -39,7 +39,7 @@ def dHondt(results, seats, threshold=0):
       if results[party] > results[thisSeat] and party in eligible:
         thisSeat = party
     elected[thisSeat] += 1
-    results[thisSeat] = origvote[thisSeat] / elected[thisSeat] + 1
+    results[thisSeat] = origvote[thisSeat] / (elected[thisSeat] + 1)
 
   # Clean up the results dict by removing parties with no seats
   for party in list(elected.keys()):
@@ -50,7 +50,7 @@ def dHondt(results, seats, threshold=0):
   return elected
 
 def SainteLague(results, seats, threshold=0):
-  # Calculate the number of seats using the Sainte-Laguë method
+  # Calculate the number of seats using the Sainte-Lague method
   # - Takes a dict with the votes and an int with the number of seats
   # - Optionally takes a minimum threshold percentage
   # - Returns a dict with the seats allocated per party
