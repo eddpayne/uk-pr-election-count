@@ -54,8 +54,6 @@ for region in sorted(parties.keys()):
     else:
       nationalresult[party] = regionresult[party]
 
-  #print(region, regionresult)
-
 # Print out the final result
 print("National Results")
 print("================")

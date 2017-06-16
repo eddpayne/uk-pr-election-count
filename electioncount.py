@@ -11,6 +11,10 @@ def dHondt(results, seats, threshold=0):
     results['Lab'] += results['Lab Co-op']
     results['Lab Co-op'] = 0
 
+  if "Labour and Co-operative" in results.keys():
+    results['Labour'] += results['Labour and Co-operative']
+    results['Labour and Co-operative'] = 0
+
   # We need two copies of this array:
   # - one to calculate the new distribution after assigning a seat
   # - one to keep track of the seats allocated (which we immediately zero)
